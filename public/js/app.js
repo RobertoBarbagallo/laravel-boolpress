@@ -37345,6 +37345,17 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+window.addEventListener("load", function () {
+  var deleteField = document.querySelectorAll(".eraser");
+  deleteField.forEach(function (form) {
+    form.addEventListener("submit", function (event) {
+      if (!confirm("Stai per eliminare un post inserito, confermi?")) {
+        event.preventDefault();
+      }
+    });
+  });
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -37410,8 +37421,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/robertobarbagallo/Desktop/Authentication/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/robertobarbagallo/Desktop/Authentication/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/robertobarbagallo/Desktop/Boolean/Progetti Back End/laravel-boolpress/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/robertobarbagallo/Desktop/Boolean/Progetti Back End/laravel-boolpress/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

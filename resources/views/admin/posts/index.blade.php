@@ -1,5 +1,15 @@
 @extends('layouts.app')
 
+@section('onAdminViewPublicLink')
+
+<li class="nav-item">
+
+    <a class="nav-link" href="{{ route("posts.index") }}" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+        Vai alla sezione Pubblica
+    </a>
+</li>
+@endsection
+
 @section('content')
 <div class="row justify-content-center">
     <a class="pb-5" href="{{ route('admin.posts.create') }}">Aggiungi post...</a>
