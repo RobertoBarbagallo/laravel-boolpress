@@ -19,14 +19,14 @@ Auth::routes();
 
 
 Route::get("/", "PostController@index")->name("posts.index");
-Route::get("/posts/{post}", "PostController@show")->name("posts.show");
+Route::get("/posts/{slug}", "PostController@show")->name("posts.show");
 
 Route::prefix('admin')
     ->namespace('Admin')
     ->middleware('auth')
     ->name("admin.")
     ->group(function () {
-
+        Route::post('/topics', 'TopicController@index')->name('topics.index');
         Route::resource("/posts", "PostController");
     });
 

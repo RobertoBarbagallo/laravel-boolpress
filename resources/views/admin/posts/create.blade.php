@@ -35,17 +35,19 @@
         </div>
 
         <div class="form-group">
-            <label for="author">Autore</label>
-            <input type="text" class="form-control" id="author" name="author" aria-describedby="authorHelp" placeholder="Inserisci l'autore">
-            <small id="authorHelp" class="form-text text-muted">Inserisci in questo campo l'autore del Post</small>
-        </div>
+            <label for="topic_id">Argomento</label>
+            <select class="form-control" name="topic_id" id="topic_id">
+                <option  value="">Scegli...</option>
+                @foreach($topics as $topic)
 
-        <div class="form-group">
-            <label for="topic">Argomento</label>
-            <input type="text" class="form-control" id="topic" name="topic" aria-describedby="topicHelp" placeholder="Inserisci l'argomento">
-            <small id="topicHelp" class="form-text text-muted">Inserisci in questo campo l'argomento del Post</small>
-        </div>
+                <option value="{{ $topic->id }}"}}>
+                    {{ $topic->name }}
+                </option>
+                @endforeach
 
+
+            </select>
+        </div>
         <input type="submit" value="Invia"><br>
     </form>
 

@@ -13,21 +13,20 @@
 
 @section('content')
 
-<div class="row justify-content-center">
-
-
+<div class="container">
 
     @foreach($posts as $post)
-    <div class="media">
-        <div class="media-body">
-            <h5 class="mt-0">{{$post->title}}</h5>
-            <p>{{$post->author}}</p>
-            <p>{{$post->topic}}</p>
-            <a href="{{route("posts.show", $post->id)}}">Dettagli...</a>
+<div class="row py-5">
+        <div class="media">
+            <div class="media-body">
+                <h5 class="mt-0">{{$post->title}}</h5>
+                <p>{{$post->user->name}}</p>
+                <p>{{$post->topic->name}}</p>
+                <a href="{{route("posts.show", $post->slug)}}">Dettagli...</a>
+            </div>
         </div>
-    </div>
+</div>
     @endforeach
-
 
 </div>
 

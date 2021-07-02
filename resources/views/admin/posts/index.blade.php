@@ -11,24 +11,32 @@
 @endsection
 
 @section('content')
-<div class="row justify-content-center">
-    <a class="pb-5" href="{{ route('admin.posts.create') }}">Aggiungi post...</a>
-</div>
-<div class="row justify-content-center">
+
+<div class="container">
+
+    <div class="row justify-content-center">
+        <a class="pb-5" href="{{ route('admin.posts.create') }}">Aggiungi post...</a>
+    </div>
 
 
     @foreach($posts as $post)
-    <div class="media">
-        <div class="media-body">
-            <h5 class="mt-0">{{$post->title}}</h5>
-            <p>{{$post->author}}</p>
-            <p>{{$post->topic}}</p>
-            <a href="{{route("admin.posts.show", $post->id)}}">Dettagli...</a>
-            <a href="{{ route('admin.posts.edit', $post->id) }}">Modifica</a>
-            @include('partials.components.deleteBtn', ["id" => $post->id])
+    <div class="row py-5">
+
+
+        <div class="media">
+            <div class="media-body">
+                <h5 class="mt-0">{{$post->title}}</h5>
+                <p>{{$post->user->name}}</p>
+                <p>{{$post->topic->name}}</p>
+                <a href="{{route("admin.posts.show", $post->id)}}">Dettagli...</a>
+                <a href="{{ route('admin.posts.edit', $post->id) }}">Modifica</a>
+                @include('partials.components.deleteBtn', ["id" => $post->id])
+            </div>
         </div>
+
     </div>
     @endforeach
+
 
 
 </div>

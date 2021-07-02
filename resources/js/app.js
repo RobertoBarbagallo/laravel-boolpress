@@ -1,5 +1,7 @@
 require('./bootstrap');
 
+document.domain = "example.com";
+
 
 window.addEventListener("load", function () {
     const deleteField = document.querySelectorAll(".eraser");
