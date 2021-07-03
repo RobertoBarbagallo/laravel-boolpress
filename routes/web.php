@@ -26,8 +26,6 @@ Route::prefix('admin')
     ->middleware('auth')
     ->name("admin.")
     ->group(function () {
-        Route::post('/topics', 'TopicController@index')->name('topics.index');
+        Route::match(array('GET', 'POST'), '/topics', 'TopicController@index')->name('topics.index');
         Route::resource("/posts", "PostController");
     });
-
-

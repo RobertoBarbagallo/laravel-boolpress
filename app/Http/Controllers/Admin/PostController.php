@@ -74,8 +74,12 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
+        $topics = Topic::all();
+
         return view("admin.posts.edit", [
-            "post" => $post
+            "post" => $post,
+            "topics" => $topics
+
         ]);
     }
 
@@ -86,7 +90,6 @@ class PostController extends Controller
         $request->validate([
             "title"=> "required|max:255|unique:posts",
             "content"=> "required|min:3|",
-            "topic" => "required|max:255",
         ]);
 
 

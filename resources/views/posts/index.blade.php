@@ -15,18 +15,21 @@
 
 <div class="container">
 
+    <div class="card-deck">
     @foreach($posts as $post)
-<div class="row py-5">
-        <div class="media">
-            <div class="media-body">
+        <div class="card">
+            <div class="card-body">
                 <h5 class="mt-0">{{$post->title}}</h5>
                 <p>{{$post->user->name}}</p>
-                <p>{{$post->topic->name}}</p>
-                <a href="{{route("posts.show", $post->slug)}}">Dettagli...</a>
+                <p class="font-weight-bold text-info">{{$post->topic->name}}</p>
+            </div>
+
+            <div class="card-footer text-center">
+                <a class="btn btn-outline-primary my-2" href="{{route("posts.show", $post->slug)}}" role="button">Dettagli...</a>
             </div>
         </div>
-</div>
     @endforeach
+    </div>
 
 </div>
 

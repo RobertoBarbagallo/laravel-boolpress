@@ -48,7 +48,7 @@
 
             </select>
         </div>
-        <input type="submit" value="Invia"><br>
+        <input class="btn btn-primary" type="submit" value="Invia"><br>
     </form>
 
 

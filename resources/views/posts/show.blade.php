@@ -11,16 +11,19 @@
 
 @section('content')
 <div class="row justify-content-center">
-    <a class="pb-5" href="{{ route('posts.index') }}">Torna alla home</a>
+    <a class="btn btn-primary my-2 mb-4" href="{{ route('posts.index') }}" role="button">Torna alla home</a>
 </div>
-
-<div class="row justify-content-center">
-    <div class="media">
-        <div class="media-body">
-            <h5 class="mt-0">{{$post->title}}</h5>
-            <p>{{$post->author}}</p>
-            <p>{{$post->topic->name}}</p>
-            <p>{{$post->content}}</p>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="font-weight-bold">{{$post->title}}</h3>
+            <div class="card-body">
+                <blockquote class="blockquote">
+                    <p>{{$post->content}}</p>
+                    <p class="font-weight-bold">{{$post->user->name}}</p>
+                    <footer class="blockquote-footer"><cite title="Source Topic" class="text-info">{{$post->topic->name}}</cite></footer>
+                </blockquote>
+            </div>
         </div>
     </div>
 </div>

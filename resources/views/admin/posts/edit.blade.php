@@ -25,29 +25,33 @@
         <div class="form-group">
             <label for="title">Titolo</label>
             <input type="text" class="form-control" id="title" name="title" aria-describedby="titleHelp" placeholder="Inserisci il titolo" value="{{old('title',  $post->title)}}">
-            <small id="titleHelp" class="form-text text-muted">Inserisci in questo campo il titolo del Post</small>
+            <small id="titleHelp" class="form-text text-muted">Modifica in questo campo il titolo del Post</small>
         </div>
 
 
         <div class="form-group">
             <label for="content">Contenuto</label>
             <textarea class="form-control" id="content" name="content" rows="5" aria-describedby="contentHelp" placeholder="Inserisci il contenuto">{{old('content', $post->content)}}</textarea>
-            <small id="contentHelp" class="form-text text-muted">Inserisci in questo campo il contenuto del Post</small>
+            <small id="contentHelp" class="form-text text-muted">Modifica in questo campo il contenuto del Post</small>
         </div>
 
+ 
         <div class="form-group">
-            <label for="author">Autore</label>
-            <input type="text" class="form-control" id="author" name="author" aria-describedby="authorHelp" placeholder="Inserisci l'autore" value="{{old('author',  $post->author)}}">
-            <small id="authorHelp" class="form-text text-muted">Inserisci in questo campo l'autore del Post</small>
+            <label for="topic_id">Argomento</label>
+            <select class="form-control" name="topic_id" id="topic_id">
+                <option value="">Scegli...</option>
+                @foreach($topics as $topic)
+
+                <option value="{{ $topic->id }}" }}>
+                    {{ $topic->name }}
+                </option>
+                @endforeach
+
+
+            </select>
         </div>
 
-        <div class="form-group">
-            <label for="topic">Argomento</label>
-            <input type="text" class="form-control" id="topic" name="topic" aria-describedby="topicHelp" placeholder="Inserisci l'argomento" value="{{old('topic',  $post->topic)}}"">
-            <small id=" topicHelp" class="form-text text-muted">Inserisci in questo campo l'argomento del Post</small>
-        </div>
-
-        <input type="submit" value="Invia"><br>
+        <input class="btn btn-primary" type="submit" value="Invia"><br>
     </form>
 
 

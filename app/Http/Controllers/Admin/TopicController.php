@@ -14,10 +14,10 @@ class TopicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $posts = Post::where("user_id", $request->user()->id)->get();
         $topics = Topic::all();
-        $posts = Post::all();
 
         return view("admin.topics.index", [
             "topics" => $topics,
