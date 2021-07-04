@@ -39,7 +39,9 @@ class PostController extends Controller
 
         $request->validate([
             "title"=> "required|max:255|unique:posts",
-            "content"=> "required|min:3|"
+            "content"=> "required|min:3|",
+            "topic_id"=> "required|integer"
+
         ]);
 
 
@@ -90,6 +92,7 @@ class PostController extends Controller
         $request->validate([
             "title"=> "required|max:255|unique:posts",
             "content"=> "required|min:3|",
+            "topic_id"=> "required|integer"
         ]);
 
 

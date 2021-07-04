@@ -39,10 +39,10 @@
         <div class="form-group">
             <label for="topic_id">Argomento</label>
             <select class="form-control" name="topic_id" id="topic_id">
-                <option value="">Scegli...</option>
+                <option disabled value="">Scegli...</option>
                 @foreach($topics as $topic)
 
-                <option value="{{ $topic->id }}" }}>
+                <option  value="{{ $topic->id }}" }}>
                     {{ $topic->name }}
                 </option>
                 @endforeach

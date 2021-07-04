@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
 
+
     <form method="post" id="topicform">
         @csrf
 
@@ -24,7 +25,7 @@
 <div class="container">
     <div class="card-deck">
         @foreach($posts as $post)
-        @if($_POST['topic_id'] && $_POST['topic_id'] == $post->topic_id)
+        @if($_POST && $_POST['topic_id'] == $post->topic_id)
         <div class="card">
             <div class="card-body">
                 <h5 class="mt-0">{{$post->title}}</h5>
@@ -38,8 +39,9 @@
                 @include('partials.components.deleteBtn', ["id" => $post->id])
             </div>
         </div>
+
+        @endif
+        @endforeach
     </div>
 </div>
-@endif
-@endforeach
 @endsection
