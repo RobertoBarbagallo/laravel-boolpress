@@ -23,7 +23,9 @@
             <div class="card-body">
                 <h5 class="mt-0">{{$post->title}}</h5>
                 <p>{{$post->user->name}}</p>
+                @if($post->topic)
                 <p class="font-weight-bold text-info">{{$post->topic->name}}</p>
+                @endif
                 @foreach($post->tags as $tag)
                    <span class="badge badge-pill badge-info">{{$tag->name}}</span> 
                 @endforeach

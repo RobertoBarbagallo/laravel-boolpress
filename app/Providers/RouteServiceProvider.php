@@ -46,7 +46,6 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
-        $this->mapListRoutes();
     }
 
     /**
@@ -78,10 +77,6 @@ class RouteServiceProvider extends ServiceProvider
             ->group(base_path('routes/api.php'));
     }
 
-    protected function mapListRoutes()
-    {
-        Route::middleware('web')
-            ->namespace('App\Http\Controllers\SuperAdmin')
-            ->group(base_path('routes/list.php'));
-    }
+
+    
 }

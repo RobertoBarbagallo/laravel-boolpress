@@ -28,9 +28,9 @@ Route::prefix('SuperAdmin')
     ->group(function () {
 
         Route::match(array('GET', 'POST'), '/topics', 'TopicController@index')->name('topics.index');
+        Route::get("/topics/list", "TopicController@list")->name("topics.list");
         Route::resource("/topics", "TopicController")->only(['create', 'destroy']);
         Route::post("/topics/store", 'TopicController@store')->name('topics.store.store');
-        Route::get('/list', 'ListController@index')->name('SuperAdmin.list.index');
         Route::resource("/posts", "PostController");
         Route::resource("/tags", "TagController")->only(['index', 'create', 'store', 'destroy']);
     });

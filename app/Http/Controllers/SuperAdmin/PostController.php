@@ -16,38 +16,38 @@ class PostController extends Controller
 {
     public function index(Request $request)
 
-    {   
+    {
 
         $posts = Post::orderBy("id", "DESC")->where("user_id", $request->user()->id)->get();
         return view("SuperAdmin.posts.index", [
-            "posts" => $posts 
+            "posts" => $posts
         ]);
     }
 
     public function create()
 
-    {   
-        $tags = Tag::all();    
+    {
+        $tags = Tag::all();
         $topics = Topic::all();
 
-        return view('SuperAdmin.posts.create',[
-            "topics"=> $topics,
-            "tags"=> $tags
+        return view('SuperAdmin.posts.create', [
+            "topics" => $topics,
+            "tags" => $tags
         ]);
     }
 
     public function store(Request $request)
 
-    {   
-        
+    {
+
 
         $newPostData = $request->all();
 
 
         $request->validate([
-            "title"=> "required|max:255",
-            "content"=> "required|min:3|",
-            "topic_id"=> "required|integer",
+            "title" => "required|max:255",
+            "content" => "required|min:3|",
+            "topic_id" => "required|integer",
             'tags' => "exists:tags,id"
         ]);
 
@@ -64,24 +64,24 @@ class PostController extends Controller
             $counter++;
             $slugExist = Post::where('slug', $slug)->first();
         }
-        
-        $newPost->slug = $slug;
-        
-        $newPost->user_id= $request->user()->id;
 
-        
+        $newPost->slug = $slug;
+
+        $newPost->user_id = $request->user()->id;
+
+
         $newPost->save();
 
-        if($request['tags'] && count($request['tags']) >0){
+        if ($request['tags'] && count($request['tags']) > 0) {
             $newPost->tags()->sync($request["tags"]);
         }
-        
+
 
         return redirect()->route('SuperAdmin.posts.show', $newPost->id);
     }
 
-    public function show(Post $post) 
-    { 
+    public function show(Post $post)
+    {
 
         return view("SuperAdmin.posts.show", [
             "post" => $post
@@ -96,7 +96,7 @@ class PostController extends Controller
         return view("SuperAdmin.posts.edit", [
             "post" => $post,
             "topics" => $topics,
-            "tags"=>$tags
+            "tags" => $tags
 
         ]);
     }
@@ -106,27 +106,26 @@ class PostController extends Controller
         $formData = $request->all();
 
         $request->validate([
-            "title"=> "required|max:255",
-            "content"=> "required|min:3|",
-            "topic_id"=> "required|integer",
-            "tags"=> "exists:tags,id"
+            "title" => "required|max:255",
+            "content" => "required|min:3|",
+            "topic_id" => "required|integer",
+            "tags" => "exists:tags,id"
         ]);
 
+
+        $post->tags()->sync($request["tags"]);
+
         $post->update($formData);
-        if($request['tags'] && count($request['tags']) >0){
-            $post->tags()->sync($request["tags"]);
-        }
 
         return redirect()->route("SuperAdmin.posts.show", $post->id);
     }
 
     public function destroy($id)
-    {   $post = Post::FindOrFail($id);
-        
+    {
+        $post = Post::FindOrFail($id);
+
         $post->delete();
 
         return redirect()->route("SuperAdmin.posts.index");
     }
-
-
 }

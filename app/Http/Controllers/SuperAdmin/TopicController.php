@@ -52,7 +52,6 @@ class TopicController extends Controller
 
     public function store(Request $request)
     {   
-        dump($request->all());
         $newTopicData = $request->all();
         $request->validate([
             "name"=> "required|max:255|unique:topics",
@@ -76,7 +75,7 @@ class TopicController extends Controller
 
         $newTopic->save();
 
-        return redirect()->route('SuperAdmin.list.index');
+        return redirect()->route('SuperAdmin.topics.list');
 
     }
 
@@ -125,8 +124,19 @@ class TopicController extends Controller
     public function destroy($id)
     {
         $topic = Topic::FindOrFail($id);
+        $topic->posts()->each(function ($post) {
+            $post->topic_id = null;
+            $post->save();
+        });
+        
         $topic->delete();
-        return redirect()->route("SuperAdmin.list.index");
+        return redirect()->route("SuperAdmin.topics.list");
     }
 
+    public function list (){
+        $topics = Topic::all();
+        return view("SuperAdmin.topics.list", [
+            "topics" => $topics 
+        ]);
+    }
 }

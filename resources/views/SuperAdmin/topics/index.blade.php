@@ -38,7 +38,7 @@
         @endif
         <div class="text-center">
             <a class="btn btn-info my-1" href="{{ route('SuperAdmin.topics.create') }}" role="button">Aggiungi un Topic</a><br>
-            <a class="btn btn-info my-1 mb-4" href="{{ route('SuperAdmin.list.index') }}" role="button">Mostra tutti i Topics</a>
+            <a class="btn btn-info my-1 mb-4" href="{{ route('SuperAdmin.topics.list') }}" role="button">Mostra tutti i Topics</a>
         </div>
 
     </form>

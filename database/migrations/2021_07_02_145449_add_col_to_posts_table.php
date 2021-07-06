@@ -14,7 +14,8 @@ class AddColToPostsTable extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->foreignId('topic_id')->constrained('topics')->nullable()->onDelete('cascade');
+            
+            $table->foreignId('topic_id')->nullable()->constrained('topics')->onDelete('set null');
         });
     }
 
