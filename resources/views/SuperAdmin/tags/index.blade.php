@@ -32,7 +32,7 @@
                 <th scope="row">{{$tag->id}}</th>
                 <td>{{$tag->name}}</td>
                 <td>{{$tag->slug}}</td>
-                <td> @include('partials.components.deleteBtnTags', ["id" => $tag->id])</td>
+                <td> @include('partials.components.deleteBtn', ["id" => $tag->id, 'resource' => 'tags'])</td>
             </tr>
 
             @endforeach
