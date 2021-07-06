@@ -1,4 +1,4 @@
-<form action="{{ route('admin.posts.destroy', $id) }}" method="post" class="eraser">
+<form action="{{ route('SuperAdmin.tags.destroy', $id) }}" method="post" class="eraser">
   @csrf
   @method('DELETE')
 

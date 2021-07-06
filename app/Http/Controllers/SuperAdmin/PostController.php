@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\SuperAdmin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Post;
-
 use App\Topic;
+use App\Tag;
 
 use Illuminate\Support\Str;
 
@@ -15,33 +15,40 @@ use Illuminate\Support\Str;
 class PostController extends Controller
 {
     public function index(Request $request)
-    {
+
+    {   
+
         $posts = Post::orderBy("id", "DESC")->where("user_id", $request->user()->id)->get();
-        return view("admin.posts.index", [
+        return view("SuperAdmin.posts.index", [
             "posts" => $posts 
         ]);
     }
 
     public function create()
-    {       
+
+    {   
+        $tags = Tag::all();    
         $topics = Topic::all();
-        return view('admin.posts.create',[
-            "topics"=> $topics
+
+        return view('SuperAdmin.posts.create',[
+            "topics"=> $topics,
+            "tags"=> $tags
         ]);
     }
 
     public function store(Request $request)
 
-    {
-    
+    {   
+        
+
         $newPostData = $request->all();
 
 
         $request->validate([
-            "title"=> "required|max:255|unique:posts",
+            "title"=> "required|max:255",
             "content"=> "required|min:3|",
-            "topic_id"=> "required|integer"
-
+            "topic_id"=> "required|integer",
+            'tags' => "exists:tags,id"
         ]);
 
 
@@ -57,19 +64,26 @@ class PostController extends Controller
             $counter++;
             $slugExist = Post::where('slug', $slug)->first();
         }
-
+        
         $newPost->slug = $slug;
-
+        
         $newPost->user_id= $request->user()->id;
 
+        
         $newPost->save();
 
-        return redirect()->route('admin.posts.show', $newPost->id);
+        if($request['tags'] && count($request['tags']) >0){
+            $newPost->tags()->sync($request["tags"]);
+        }
+        
+
+        return redirect()->route('SuperAdmin.posts.show', $newPost->id);
     }
 
-    public function show(Post $post)
-    {
-        return view("admin.posts.show", [
+    public function show(Post $post) 
+    { 
+
+        return view("SuperAdmin.posts.show", [
             "post" => $post
         ]);
     }
@@ -77,10 +91,12 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $topics = Topic::all();
+        $tags = Tag::all();
 
-        return view("admin.posts.edit", [
+        return view("SuperAdmin.posts.edit", [
             "post" => $post,
-            "topics" => $topics
+            "topics" => $topics,
+            "tags"=>$tags
 
         ]);
     }
@@ -90,23 +106,26 @@ class PostController extends Controller
         $formData = $request->all();
 
         $request->validate([
-            "title"=> "required|max:255|unique:posts",
+            "title"=> "required|max:255",
             "content"=> "required|min:3|",
-            "topic_id"=> "required|integer"
+            "topic_id"=> "required|integer",
+            "tags"=> "exists:tags,id"
         ]);
 
-
         $post->update($formData);
+        if($request['tags'] && count($request['tags']) >0){
+            $post->tags()->sync($request["tags"]);
+        }
 
-        return redirect()->route("admin.posts.show", $post->id);
+        return redirect()->route("SuperAdmin.posts.show", $post->id);
     }
 
     public function destroy($id)
     {   $post = Post::FindOrFail($id);
-
+        
         $post->delete();
 
-        return redirect()->route("admin.posts.index");
+        return redirect()->route("SuperAdmin.posts.index");
     }
 
 

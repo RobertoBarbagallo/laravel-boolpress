@@ -66,7 +66,7 @@
                             </div>
                         </li>
                         @yield('onPublicViewButLogged')
-                        @yield('onAdminViewPublicLink')
+                        @yield('onSuperAdminViewPublicLink')
                         @endguest
                     </ul>
                 </div>

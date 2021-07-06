@@ -7,7 +7,7 @@ window.addEventListener("load", function () {
   
       form.addEventListener("submit", (event) => {
   
-        if (!confirm("Stai per eliminare un post inserito, confermi?")) {
+        if (!confirm("Stai per eliminare un dato inserito, confermi?")) {
           event.preventDefault();
         }
   

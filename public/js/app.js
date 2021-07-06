@@ -37349,7 +37349,7 @@ window.addEventListener("load", function () {
   var deleteField = document.querySelectorAll(".eraser");
   deleteField.forEach(function (form) {
     form.addEventListener("submit", function (event) {
-      if (!confirm("Stai per eliminare un post inserito, confermi?")) {
+      if (!confirm("Stai per eliminare un dato inserito, confermi?")) {
         event.preventDefault();
       }
     });

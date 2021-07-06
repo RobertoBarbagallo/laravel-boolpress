@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
-
+namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
-use App\Topic;
+
 use App\Post;
+use App\Topic;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class TopicController extends Controller
 {
@@ -15,15 +17,18 @@ class TopicController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
+
+
     {
+        // dump($request);
         $posts = Post::where("user_id", $request->user()->id)->get();
         $topics = Topic::all();
 
-        return view("admin.topics.index", [
+        return view("SuperAdmin.topics.index", [
             "topics" => $topics,
             "posts" => $posts
-
         ]);
+     
     }
 
     /**
@@ -33,7 +38,7 @@ class TopicController extends Controller
      */
     public function create()
     {
-        //
+        return view('SuperAdmin.topics.create');
     }
 
     /**
@@ -42,9 +47,37 @@ class TopicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
+
     public function store(Request $request)
-    {
-        //
+    {   
+        dump($request->all());
+        $newTopicData = $request->all();
+        $request->validate([
+            "name"=> "required|max:255|unique:topics",
+        ]);
+
+        $newTopic = new Topic();
+
+        $newTopic->fill($newTopicData);
+
+        $slug = Str::slug($newTopic->name);
+        $slug_base = $slug;
+        $slugExist = Topic::where('slug', $slug)->first();
+        $counter = 1;
+        while ($slugExist) {
+            $slug = $slug_base . '-' . $counter;
+            $counter++;
+            $slugExist = Topic::where('slug', $slug)->first();
+        }
+
+        $newTopic->slug = $slug;
+
+        $newTopic->save();
+
+        return redirect()->route('SuperAdmin.list.index');
+
     }
 
     /**
@@ -53,9 +86,11 @@ class TopicController extends Controller
      * @param  \App\Topic  $topic
      * @return \Illuminate\Http\Response
      */
+
+
     public function show(Topic $topic)
     {
-        //
+    
     }
 
     /**
@@ -87,8 +122,11 @@ class TopicController extends Controller
      * @param  \App\Topic  $topic
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Topic $topic)
+    public function destroy($id)
     {
-        //
+        $topic = Topic::FindOrFail($id);
+        $topic->delete();
+        return redirect()->route("SuperAdmin.list.index");
     }
+
 }

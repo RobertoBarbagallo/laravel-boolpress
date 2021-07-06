@@ -21,7 +21,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/admin/posts';
+    public const HOME = '/SuperAdmin/posts';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -46,7 +46,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
-        //
+        $this->mapListRoutes();
     }
 
     /**
@@ -76,5 +76,12 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
+    }
+
+    protected function mapListRoutes()
+    {
+        Route::middleware('web')
+            ->namespace('App\Http\Controllers\SuperAdmin')
+            ->group(base_path('routes/list.php'));
     }
 }

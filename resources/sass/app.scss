@@ -6,3 +6,8 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+.mycard{
+    min-width: 25%;
+    flex-grow: 0;
+}

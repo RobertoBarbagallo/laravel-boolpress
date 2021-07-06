@@ -1,17 +1,18 @@
 @extends('layouts.app')
 
-@section('onPublicViewButLogged')
+@section('onSuperAdminViewPublicLink')
 
 <li class="nav-item">
-    <a id="navbarLink" class="nav-link" href="{{ route("SuperAdmin.posts.index") }}" role="navigation" v-pre>
-        Vai alla sezione SuperAdmin
+
+    <a class="nav-link" href="{{ route("posts.index") }}" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+        Vai alla sezione Pubblica
     </a>
 </li>
 @endsection
 
 @section('content')
 <div class="row justify-content-center">
-    <a class="btn btn-primary my-2 mb-4" href="{{ route('posts.index') }}" role="button">Torna alla home</a>
+    <a class="btn btn-primary mb-4" href="{{ route('SuperAdmin.posts.index') }}">Torna ai Posts...</a>
 </div>
 <div class="container">
     <div class="card">
@@ -30,9 +31,13 @@
                     @endforeach
                     <br>
                 @endif
+                <div class="text-center">
+                <a class="btn btn-outline-info my-1 mt-4" href="{{ route('SuperAdmin.posts.edit', $post->id) }}">Modifica</a>
+                @include('partials.components.deleteBtnPosts', ["id" => $post->id])
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 @endsection
+
