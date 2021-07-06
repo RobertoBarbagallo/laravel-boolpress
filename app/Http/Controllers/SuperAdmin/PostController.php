@@ -16,9 +16,27 @@ class PostController extends Controller
 {
     public function index(Request $request)
 
-    {
-
+    {   
         $posts = Post::orderBy("id", "DESC")->where("user_id", $request->user()->id)->get();
+
+
+        
+        // $requestedId = $request->tag_id;
+        // if(count($request->request) > 0){
+
+        //     $posts = Post::all();
+        //     foreach ($posts as $post) {
+        //         $arrayToSearch = $post->tags->pluck('id')->toArray();
+        //         if(in_array($requestedId, $arrayToSearch)){
+                  
+        //             $posts = Post::all()->where()
+
+        //         }
+        //     }
+        
+        // }    
+           
+        
         return view("SuperAdmin.posts.index", [
             "posts" => $posts
         ]);

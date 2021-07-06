@@ -23,6 +23,7 @@
                 <th scope="col">Tag</th>
                 <th scope="col">Tag Slug</th>
                 <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -33,6 +34,7 @@
                 <td>{{$tag->name}}</td>
                 <td>{{$tag->slug}}</td>
                 <td> @include('partials.components.deleteBtn', ["id" => $tag->id, 'resource' => 'tags'])</td>
+                <td> <a class="btn btn-outline-info my-1" href="{{ route('SuperAdmin.posts.index', ['tag_id' => $tag->id])}}" role="button">Filtra i Posts per Etichetta</a></td>
             </tr>
 
             @endforeach

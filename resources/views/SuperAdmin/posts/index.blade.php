@@ -18,6 +18,8 @@
         <a class="btn btn-primary mb-4 mx-4" href="{{ route('SuperAdmin.tags.index') }}" role="button">Vai alle Etichette...</a>
     </div>
     <div class="card-deck flex-wrap">
+    @if($posts)
+        
         @foreach($posts as $post)
         <div class="card mycard my-4">
             <div class="card-body">
@@ -26,9 +28,12 @@
                 @if($post->topic)
                 <p class="font-weight-bold text-info">{{$post->topic->name}}</p>
                 @endif
-                @foreach($post->tags as $tag)
-                   <span class="badge badge-pill badge-info">{{$tag->name}}</span> 
-                @endforeach
+                @if($post->tags)
+                    @foreach($post->tags as $tag)
+
+                        <span class="badge badge-pill badge-info">{{$tag->name}}</span>
+                    @endforeach
+                @endif
             </div>
 
             <div class="card-footer text-center">
@@ -38,6 +43,7 @@
             </div>
         </div>
         @endforeach
+    @endif
     </div>
 </div>
 

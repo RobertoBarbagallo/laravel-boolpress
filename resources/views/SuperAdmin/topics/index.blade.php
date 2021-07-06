@@ -58,7 +58,7 @@
                 <div class="card-footer text-center">
                     <a class="btn btn-outline-primary my-1" href="{{route("SuperAdmin.posts.show", $post->id)}}" role="button">Dettagli...</a><br>
                     <a class="btn btn-outline-info my-1" href="{{ route('SuperAdmin.posts.edit', $post->id) }}">Modifica</a><br>
-                    @include('partials.components.deleteBtn', ["id" => $post->id, 'resource' => 'topics'])
+                    @include('partials.components.deleteBtn', ["id" => $post->id, 'resource' => 'posts'])
                 </div>
             </div>
             @endif
