@@ -9,14 +9,13 @@
     </a>
 </li>
 @endsection
-
 @section('content')
 <div class="row justify-content-center">
     <a class="btn btn-primary mb-4" href="{{ route('SuperAdmin.posts.index') }}">Torna ai Posts...</a>
 </div>
 <div class="container">
 
-    @if(count($posts)>1)
+    @if(count($posts) > 0)
     <form method="post" id="topicform">
         @csrf
 
@@ -35,7 +34,7 @@
         <div class="text-center">
             <input class="btn btn-primary mb-4" type="submit" value="Cerca"><br>
         </div>
-        @endif
+    @endif
         <div class="text-center">
             <a class="btn btn-info my-1" href="{{ route('SuperAdmin.topics.create') }}" role="button">Aggiungi un Topic</a><br>
             <a class="btn btn-info my-1 mb-4" href="{{ route('SuperAdmin.topics.list') }}" role="button">Mostra tutti i Topics</a>
