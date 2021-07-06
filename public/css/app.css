@@ -10942,8 +10942,8 @@ a.text-dark:focus {
   }
 }
 
-.mycard {
-  min-width: 25%;
+.card-deck .card.mycard {
+  flex-basis: calc(25% - 32px);
   flex-grow: 0;
 }
 

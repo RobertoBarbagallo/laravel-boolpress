@@ -35,7 +35,7 @@
                 @endif
                 <div class="text-center">
                 <a class="btn btn-outline-info my-1 mt-4" href="{{ route('SuperAdmin.posts.edit', $post->id) }}">Modifica</a>
-                @include('partials.components.deleteBtnPosts', ["id" => $post->id])
+                @include('partials.components.deleteBtn', ["id" => $post->id, 'resource' => 'posts'])
                 </div>
             </div>
         </div>

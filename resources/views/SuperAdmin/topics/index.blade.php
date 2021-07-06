@@ -43,12 +43,12 @@
     </form>
 </div>
 <div class="container">
-    <div class="card-deck">
+    <div class="card-deck flex-wrap">
         @foreach($posts as $post)
 
         @if($_POST)
             @if($_POST['topic_id'] == $post->topic_id)
-            <div class="card" >
+            <div class="card mycard my-4" >
                 <div class="card-body">
                     <h5 class="mt-0">{{$post->title}}</h5>
                     <p>{{$post->user->name}}</p>
@@ -58,7 +58,7 @@
                 <div class="card-footer text-center">
                     <a class="btn btn-outline-primary my-1" href="{{route("SuperAdmin.posts.show", $post->id)}}" role="button">Dettagli...</a><br>
                     <a class="btn btn-outline-info my-1" href="{{ route('SuperAdmin.posts.edit', $post->id) }}">Modifica</a><br>
-                    @include('partials.components.deleteBtnPosts', ["id" => $post->id])
+                    @include('partials.components.deleteBtn', ["id" => $post->id, 'resource' => 'topics'])
                 </div>
             </div>
             @endif

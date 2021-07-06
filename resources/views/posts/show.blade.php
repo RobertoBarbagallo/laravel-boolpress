@@ -21,7 +21,9 @@
                 <blockquote class="blockquote">
                     <p>{{$post->content}}</p>
                     <p class="font-weight-bold">{{$post->user->name}}</p>
+                    @if($post->topic)
                     <footer class="blockquote-footer"><cite title="Source Topic" class="text-info">{{$post->topic->name}}</cite></footer>
+                    @endif
                 </blockquote>
                 @if(count($post->tags)<1) <em>Non ci sono Etichette</em><br>
                 @else
