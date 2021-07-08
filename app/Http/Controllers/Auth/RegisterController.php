@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Mail\WelcomeEmail;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -66,18 +63,11 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    {       
-
-        $newUser = User::create([
+    {
+        return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'api_token' => Hash::make(Str::random(80)),
-            // 'api_token' => 'ciao'
         ]);
-
-        Mail::to($data['email'])->send(new WelcomeEmail);
-
-        return $newUser;
     }
 }

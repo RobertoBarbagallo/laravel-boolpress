@@ -5,8 +5,11 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
@@ -44,4 +47,22 @@ class User extends Authenticatable
     public function roles(){
         return $this->belongsToMany(("App\Role"));
     }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+    protected function create(array $data)
+{
+    return User::forceCreate([
+        'name' => $data['name'],
+        'email' => $data['email'],
+        'password' => Hash::make($data['password']),
+    ]);
+}
 }

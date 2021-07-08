@@ -17,6 +17,9 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
+            @if($post->img)
+                <img class="card-img-top" src="{{ asset('storage/' . $post->img) }}" alt="Card image cap">
+            @endif
             <h3 class="font-weight-bold">{{$post->title}}</h3>
             <div class="card-body">
                 <blockquote class="blockquote">

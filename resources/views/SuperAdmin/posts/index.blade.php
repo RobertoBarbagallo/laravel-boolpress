@@ -17,14 +17,17 @@
         <a class="btn btn-primary mb-4 mx-4" href="{{ route('SuperAdmin.topics.index') }}" role="button">Vai ai Topics...</a>
         <a class="btn btn-primary mb-4 mx-4" href="{{ route('SuperAdmin.tags.index') }}" role="button">Vai alle Etichette...</a>
         @if(request()->get('tag_id'))
-          <a class="btn btn-primary mb-4 mx-4" href="{{ route('SuperAdmin.posts.index') }}" role="button">Azzera i filtri...</a>
-        @endif  
+        <a class="btn btn-primary mb-4 mx-4" href="{{ route('SuperAdmin.posts.index') }}" role="button">Azzera i filtri...</a>
+        @endif
     </div>
     <div class="card-deck flex-wrap">
-    @if($posts)
-        
+        @if($posts)
+
         @foreach($posts as $post)
         <div class="card mycard my-4">
+            @if($post->img)
+                <img class="card-img-top" src="{{ asset('storage/' . $post->img) }}" alt="Card image cap">
+            @endif
             <div class="card-body">
                 <h5 class="mt-0">{{$post->title}}</h5>
                 <p>{{$post->user->name}}</p>
@@ -32,10 +35,10 @@
                 <p class="font-weight-bold text-info">{{$post->topic->name}}</p>
                 @endif
                 @if($post->tags)
-                    @foreach($post->tags as $tag)
+                @foreach($post->tags as $tag)
 
-                        <span class="badge badge-pill badge-info">{{$tag->name}}</span>
-                    @endforeach
+                <span class="badge badge-pill badge-info">{{$tag->name}}</span>
+                @endforeach
                 @endif
             </div>
 
@@ -46,7 +49,7 @@
             </div>
         </div>
         @endforeach
-    @endif
+        @endif
     </div>
 </div>
 

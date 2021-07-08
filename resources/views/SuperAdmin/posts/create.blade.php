@@ -18,7 +18,7 @@
 
 @include("partials.components.errors")
 <div class="container">
-    <form action="{{ route('SuperAdmin.posts.store') }}" method="post" id="postform">
+    <form action="{{ route('SuperAdmin.posts.store') }}" method="post" id="postform" enctype="multipart/form-data">
         @csrf
 
         <div class="form-group">
@@ -48,19 +48,25 @@
 
             </select>
         </div>
-         <div class="form-group">
-          <label>Etichette</label><br>
+        <div class="form-group">
+            <label>Etichette</label><br>
 
-          @foreach($tags as $tag)
+            @foreach($tags as $tag)
 
-          <div class="form-check form-check-inline">
-            <label class="form-check-label">
-              <input name="tags[]" class="form-check-input" type="checkbox" value="{{ $tag->id }}">
-              {{ $tag->name }}
-            </label>
-          </div>
-          @endforeach
-        </div> 
+            <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                    <input name="tags[]" class="form-check-input" type="checkbox" value="{{ $tag->id }}">
+                    {{ $tag->name }}
+                </label>
+            </div>
+            @endforeach
+        </div>
+
+        <div class="form-group">
+            <label for="content">Aggiungi immagine</label>
+            <input type="file" accept=".jpg, .png, .svg, .jpeg" class="form-control-file" id="img" name="img" aria-describedby="imgHelp" placeholder="Inserisci il file">
+            <small id="imgHelp" class="form-text text-muted">Inserisci in questo campo l'immagine</small>
+        </div>
         <input class="btn btn-primary" type="submit" value="Invia"><br>
     </form>
 

@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index() {
+    
 
-      
+    public function index() {
       
         $posts = Post::with("topic")->with("tags")->get();
     

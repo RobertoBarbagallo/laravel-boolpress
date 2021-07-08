@@ -34,3 +34,7 @@ Route::prefix('SuperAdmin')
         Route::resource("/posts", "PostController");
         Route::resource("/tags", "TagController")->only(['index', 'create', 'store', 'destroy']);
     });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

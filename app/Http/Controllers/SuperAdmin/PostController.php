@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Topic;
 use App\Tag;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 
@@ -65,7 +65,8 @@ class PostController extends Controller
             "title" => "required|max:255",
             "content" => "required|min:3|",
             "topic_id" => "required|integer",
-            'tags' => "exists:tags,id"
+            'tags' => "exists:tags,id",
+            'img' => 'mimes:jpeg,jpg,bmp,png'
         ]);
 
 
@@ -87,12 +88,16 @@ class PostController extends Controller
         $newPost->user_id = $request->user()->id;
 
 
+        if($request['img']){
+            $newPost->img = Storage::put('uploads' , $newPostData['img']);
+        }
+        
         $newPost->save();
-
+        
         if ($request['tags'] && count($request['tags']) > 0) {
             $newPost->tags()->sync($request["tags"]);
         }
-
+        
 
         return redirect()->route('SuperAdmin.posts.show', $newPost->id);
     }
@@ -120,20 +125,32 @@ class PostController extends Controller
 
     public function update(Request $request, Post $post)
     {
+  
         $formData = $request->all();
 
         $request->validate([
             "title" => "required|max:255",
             "content" => "required|min:3|",
             "topic_id" => "required|integer",
-            "tags" => "exists:tags,id"
+            "tags" => "exists:tags,id",
+            'img' => 'mimes:jpeg,jpg,bmp,png'
         ]);
 
-
         $post->tags()->sync($request["tags"]);
+        
+        
+       
+        if (key_exists("img", $formData)) {
+            if ($post->img) {
+                Storage::delete($post->img);
+            }
 
+            $storageResult = Storage::put("uploads", $formData["img"]);
+
+            $formData["img"] = $storageResult;
+        }
         $post->update($formData);
-
+        dump($post);
         return redirect()->route("SuperAdmin.posts.show", $post->id);
     }
 
