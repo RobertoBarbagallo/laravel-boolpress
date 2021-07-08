@@ -15,3 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:api')->get('/user', 'UserController@AuthRouteAPI');
+
+Route::middleware('auth:api')->get("/posts", "api\PostController@index");
