@@ -16,6 +16,9 @@
         <a class="btn btn-primary mb-4 mx-4" href="{{ route('SuperAdmin.posts.create') }}" role="button">Aggiungi post...</a>
         <a class="btn btn-primary mb-4 mx-4" href="{{ route('SuperAdmin.topics.index') }}" role="button">Vai ai Topics...</a>
         <a class="btn btn-primary mb-4 mx-4" href="{{ route('SuperAdmin.tags.index') }}" role="button">Vai alle Etichette...</a>
+        @if(request()->get('tag_id'))
+          <a class="btn btn-primary mb-4 mx-4" href="{{ route('SuperAdmin.posts.index') }}" role="button">Azzera i filtri...</a>
+        @endif  
     </div>
     <div class="card-deck flex-wrap">
     @if($posts)

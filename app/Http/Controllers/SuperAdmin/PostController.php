@@ -19,23 +19,22 @@ class PostController extends Controller
     {   
         $posts = Post::orderBy("id", "DESC")->where("user_id", $request->user()->id)->get();
 
+        $requestedId = $request->tag_id;
 
-        
-        // $requestedId = $request->tag_id;
-        // if(count($request->request) > 0){
-
-        //     $posts = Post::all();
-        //     foreach ($posts as $post) {
-        //         $arrayToSearch = $post->tags->pluck('id')->toArray();
-        //         if(in_array($requestedId, $arrayToSearch)){
-                  
-        //             $posts = Post::all()->where()
-
-        //         }
-        //     }
-        
-        // }    
-           
+        if(count($request->request) > 0){
+            foreach ($posts as $post) {
+                $singlePostTags = $post->tags;
+                foreach ($singlePostTags as $singlePostTag) {
+                    if($requestedId == $singlePostTag->id){
+                        $posts = Post::join("post_tag", "posts.id", "=", "post_tag.post_id")
+                         ->where("post_tag.tag_id", $requestedId)->get();
+                         return view("SuperAdmin.posts.index", [
+                        "posts" => $posts
+                    ]); 
+                    }
+                }
+            }
+        }
         
         return view("SuperAdmin.posts.index", [
             "posts" => $posts
