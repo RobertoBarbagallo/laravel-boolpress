@@ -16,12 +16,14 @@
 </div>
 <div class="container">
     <div class="card">
-        <div class="card-header">
+        <div class="card-header text-center">
             @if($post->img)
-                <img class="card-img-top" src="{{ asset('storage/' . $post->img) }}" alt="Card image cap">
+                <img class="card-img-top w-50 mr-auto ml-auto" src="{{ asset('storage/' . $post->img) }}" alt="Card image cap">
             @endif
             <h3 class="font-weight-bold">{{$post->title}}</h3>
+            </div>
             <div class="card-body">
+
                 <blockquote class="blockquote">
                     <p>{{$post->content}}</p>
                     <p class="font-weight-bold">{{$post->user->name}}</p>
@@ -41,7 +43,6 @@
                 @include('partials.components.deleteBtn', ["id" => $post->id, 'resource' => 'posts'])
                 </div>
             </div>
-        </div>
     </div>
 </div>
 @endsection
