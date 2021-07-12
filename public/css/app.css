@@ -10947,3 +10947,8 @@ a.text-dark:focus {
   flex-grow: 0;
 }
 
+.card-deck .card .card-img-top.myimg {
+  width: auto;
+  height: 200px;
+}
+

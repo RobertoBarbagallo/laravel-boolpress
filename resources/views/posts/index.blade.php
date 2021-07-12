@@ -18,6 +18,9 @@
     <div class="card-deck flex-wrap">
     @foreach($posts as $post)
         <div class="card mycard my-4">
+            @if($post->img)
+                <img class="card-img-top myimg" src="{{ asset('storage/' . $post->img) }}" alt="Card image cap">
+            @endif
             <div class="card-body">
                 <h5 class="mt-0">{{$post->title}}</h5>
                 <p>{{$post->user->name}}</p>

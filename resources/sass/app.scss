@@ -7,7 +7,18 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-.card-deck .card.mycard{
-    flex-basis: calc(25% - 32px);
-    flex-grow: 0;
+.card-deck .card{
+
+    &.mycard{
+        flex-basis: calc(25% - 32px);
+        flex-grow: 0;
+    }
+
+    .card-img-top{
+
+        &.myimg{
+            width: auto;
+            height: 200px;
+        }        
+    }
 }

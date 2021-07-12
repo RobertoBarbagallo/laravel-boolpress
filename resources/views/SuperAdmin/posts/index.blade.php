@@ -26,7 +26,7 @@
         @foreach($posts as $post)
         <div class="card mycard my-4">
             @if($post->img)
-                <img class="card-img-top" src="{{ asset('storage/' . $post->img) }}" alt="Card image cap">
+                <img class="card-img-top myimg" src="{{ asset('storage/' . $post->img) }}" alt="Card image cap">
             @endif
             <div class="card-body">
                 <h5 class="mt-0">{{$post->title}}</h5>
