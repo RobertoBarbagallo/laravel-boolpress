@@ -15,12 +15,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 |
 */
 
-Route::middleware('auth:api')->get('/user', 'UserController@AuthRouteAPI');
 
-Route::middleware('auth:api')->get("/posts", "api\PostController@index");
+Route::post('/login', 'AuthController@login');
+Route::middleware('auth:sanctum')->get("/posts", "api\PostController@index");
 
-Route::get('/login', function(){
-    $credentials = request()->only(['email', 'password']);
-    $token = auth()->Gate::authorize($credentials);
-    return $token;
-});

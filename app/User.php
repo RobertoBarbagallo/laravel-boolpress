@@ -4,14 +4,17 @@ namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
-use Tymon\JWTAuth\Contracts\JWTSubject;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 
 
-class User extends Authenticatable implements JWTSubject
+
+
+
+class User extends Authenticatable 
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +22,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'api_token'
+        'name', 'email', 'password', 'token'
     ];
 
     /**
@@ -48,15 +51,7 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany(("App\Role"));
     }
 
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
 
-    public function getJWTCustomClaims()
-    {
-        return [];
-    }
     protected function create(array $data)
 {
     return User::forceCreate([
